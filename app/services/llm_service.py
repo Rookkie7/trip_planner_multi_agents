@@ -7,6 +7,7 @@ from ..config import get_settings
 _llm_instance = None
 import logging
 logger = logging.getLogger(__name__)
+import os
 
 def get_llm() -> HelloAgentsLLM:
     """
@@ -23,6 +24,8 @@ def get_llm() -> HelloAgentsLLM:
         # HelloAgentsLLM会自动从环境变量读取配置
         # 包括OPENAI_API_KEY, OPENAI_BASE_URL, OPENAI_MODEL等
         _llm_instance = HelloAgentsLLM()
+
+        os.environ['OPENAI_TIMEOUT'] = '120'
 
         logger.info(f"✅ LLM服务初始化成功")
         logger.info(f"   提供商: {_llm_instance.provider}")

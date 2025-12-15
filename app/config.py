@@ -21,7 +21,7 @@ class Settings(BaseSettings):
 
     # 应用基本配置
     app_name: str = "HelloAgents智能旅行助手"
-    app_version: str = "1.0.0"
+    app_version: str = "1.0.2"
     debug: bool = False
 
     # 服务器配置
@@ -33,6 +33,10 @@ class Settings(BaseSettings):
 
     # 高德地图API配置
     amap_api_key: str = os.getenv("AMAP_API_KEY", "")
+
+    # Unsplash API配置
+    unsplash_access_key: str = os.getenv("UNSPLASH_ACCESS_KEY", "")
+    unsplash_secret_key: str = os.getenv("UNSPLASH_SECRET_KEY", "")
 
     # LLM配置 (从环境变量读取,由HelloAgents管理)
     openai_api_key: str = os.getenv("OPENAI_API_KEY", "")

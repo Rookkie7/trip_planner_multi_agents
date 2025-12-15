@@ -64,6 +64,7 @@ class Meal(BaseModel):
     address: Optional[str] = Field(default=None, description="地址")
     location: Optional[Location] = Field(default=None, description="经纬度坐标")
     description: Optional[str] = Field(default=None, description="描述")
+    photos: Optional[List[str]] = Field(default_factory=list, description="食物图片URL列表")
     estimated_cost: int = Field(default=0, description="预估费用(元)")
 
 

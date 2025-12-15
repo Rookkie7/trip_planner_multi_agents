@@ -209,6 +209,7 @@ class MultiAgentTripPlanner():
 
         except Exception as e:
             logger.error(f"LLM服务初始化失败, 错误原因：{str(e)}")
+            raise e
 
 
     def plan(self, request: TripRequest):

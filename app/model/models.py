@@ -1,6 +1,6 @@
 """数据模型定义"""
 
-from typing import List, Optional, Union
+from typing import List, Optional, Union,Dict ,Any
 from pydantic import BaseModel, Field, field_validator
 from datetime import date
 
@@ -150,3 +150,19 @@ class ErrorResponse(BaseModel):
     message: str = Field(..., description="错误消息")
     error_code: Optional[str] = Field(default=None, description="错误代码")
 
+# ============ 解析模型 ============
+
+class ParseRequestInput(BaseModel):
+    """解析自然语言请求输入"""
+    user_input: str = Field(..., description="用户自然语言输入", example="我想下周去北京玩3天，想看历史景点")
+    session_id: Optional[str] = Field(default=None, description="会话ID，用于保持对话上下文")
+
+class ParseRequestResponse(BaseModel):
+    """解析自然语言请求响应"""
+    success: bool = Field(..., description="是否成功")
+    status: str = Field(..., description="状态: complete/incomplete/error")
+    message: str = Field(default="", description="消息")
+    trip_request: Optional[TripRequest] = Field(default=None, description="完整的旅行请求（当status=complete时）")
+    missing_fields: Optional[List[str]] = Field(default=None, description="缺失的字段列表（当status=incomplete时）")
+    suggestions: Optional[str] = Field(default=None, description="补全建议（当status=incomplete时）")
+    partial_data: Optional[Dict[str, Any]] = Field(default=None, description="已收集的部分数据（当status=incomplete时）")

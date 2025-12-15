@@ -9,7 +9,7 @@ logging.basicConfig(
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from .config import get_settings, validate_config, print_config
-from .router import plan_router
+from .router import plan_router,request_router
 
 # 获取配置
 settings = get_settings()
@@ -34,6 +34,7 @@ app.add_middleware(
 
 # 注册路由
 app.include_router(plan_router.router, prefix="/api")
+app.include_router(request_router.router, prefix="/api")
 
 @app.on_event("startup")
 async def startup_event():
